@@ -9,16 +9,24 @@ class Game {
 
     render() {
         this.ctx.fillStyle = 'red';
-        this.ctx.fillRect(100, 200, 350, 150);
+        this.player.update();
+        this.player.draw();
     }
 }
 
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
     const canvas = document.getElementById('canvas1');
     const ctx = canvas.getContext('2d');
     canvas.width = 720;
     canvas.height = 720;
 
     const game = new Game(canvas, ctx);
-    game.render();
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        game.render();
+        requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
+    
 })
